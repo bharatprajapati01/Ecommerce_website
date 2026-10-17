@@ -1,0 +1,23 @@
+{% extends "store/account/base_account.html" %}
+{% block title %}My orders | Shopwise{% endblock %}
+
+{% block account_content %}
+<h1>My orders</h1>
+{% for order in orders %}
+  <section class="order">
+    <header>
+      <strong>Order #{{ order.id }}</strong>
+      <span>{{ order.created|date:"d M Y, H:i" }}</span>
+      <span class="status {{ order.status }}">{{ order.get_status_display }}</span>
+      <strong>₹{{ order.total }}</strong>
+    </header>
+    <ul>
+      {% for item in order.items.all %}
+        <li>{{ item.quantity }} × <a href="{{ item.product.get_absolute_url }}">{{ item.product.name }}</a> <span>₹{{ item.line_total }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+{% empty %}
+  <p class="empty">You haven't placed any orders yet. <a href="{% url 'product_list' %}">Start shopping</a></p>
+{% endfor %}
+{% endblock %}

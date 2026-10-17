@@ -1,0 +1,14 @@
+{% extends "store/base.html" %}
+{% block title %}Order placed | Shopwise{% endblock %}
+
+{% block content %}
+<div class="success">
+  <h1>Thank you, {{ order.full_name }}!</h1>
+  <p>Your order <strong>#{{ order.id }}</strong> has been placed. Total: <strong>₹{{ order.total }}</strong>.</p>
+  <p>Shipping to {{ order.address }}, {{ order.city }} {{ order.postal_code }}.</p>
+  <div class="actions">
+    <a class="btn" href="{% url 'order_history' %}">View my orders</a>
+    <a class="btn ghost" href="{% url 'product_list' %}">Keep shopping</a>
+  </div>
+</div>
+{% endblock %}

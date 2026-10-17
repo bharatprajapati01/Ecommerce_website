@@ -1,0 +1,50 @@
+{% extends "store/base.html" %}
+{% block title %}{% if category %}{{ category.name }}{% else %}All products{% endif %} | Shopwise{% endblock %}
+
+{% block main_class %} wide{% endblock %}
+
+{% block content %}
+<div>
+  <section>
+    {% if category.parent %}
+      <p class="crumbs"><a href="{% url 'product_list' %}">Products</a> / <a href="{% url 'category' category.parent.slug %}">{{ category.parent.name }}</a> / {{ category.name }}</p>
+    {% endif %}
+    {% if subcategories %}
+      <div class="chips">
+        {% for s in subcategories %}<a href="{% url 'category' s.slug %}">{{ s.icon }} {{ s.name }}</a>{% endfor %}
+      </div>
+    {% endif %}
+    <div class="list-head">
+      <h1>{% if category %}{{ category.icon }} {{ category.name }}{% else %}All products{% endif %}{% if q %} <small>results for “{{ q }}”</small>{% endif %}</h1>
+      <form method="get" class="sort">
+        {% if q %}<input type="hidden" name="q" value="{{ q }}">{% endif %}
+        <label for="sort" id="sort-label">Sort</label>
+        <select name="sort" id="sort" class="js-select" onchange="this.form.submit()">
+          <option value="">Newest</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Price: low to high</option>
+          <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Price: high to low</option>
+          <option value="name" {% if sort == 'name' %}selected{% endif %}>Name</option>
+        </select>
+      </form>
+    </div>
+
+    {% if page.object_list %}
+      <div class="grid">
+        {% for p in page %}
+          {% include "store/product_card.html" %}
+        {% endfor %}
+      </div>
+
+      {% if page.has_other_pages %}
+        <nav class="pager">
+          {% if page.has_previous %}<a href="?page={{ page.previous_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}{% if sort %}&sort={{ sort }}{% endif %}">&larr; Prev</a>{% endif %}
+          <span>Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+          {% if page.has_next %}<a href="?page={{ page.next_page_number }}{% if q %}&q={{ q|urlencode }}{% endif %}{% if sort %}&sort={{ sort }}{% endif %}">Next &rarr;</a>{% endif %}
+        </nav>
+      {% endif %}
+    {% else %}
+      <p class="empty">No products found.</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

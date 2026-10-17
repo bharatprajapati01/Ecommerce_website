@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Stainless Steel Water Bottle">
+<title>Stainless Steel Water Bottle</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dcfce7"/><stop offset="1" stop-color="#ccfbf1"/></linearGradient></defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<circle cx="300" cy="225" r="172" fill="#fff" opacity=".55"/>
+<ellipse cx="300" cy="404" rx="118" ry="11" fill="#0f172a" opacity=".1"/>
+<g transform="translate(120 45) scale(1.8)"><rect x="84" y="12" width="32" height="24" rx="7" fill="#0a74a3"/><rect x="90" y="34" width="20" height="14" fill="#cbd5e1"/><path d="M72 62 Q72 48 86 48 H114 Q128 48 128 62 V176 Q128 190 114 190 H86 Q72 190 72 176 Z" fill="#0ea5e9"/><rect x="72" y="104" width="56" height="16" fill="#0a74a3" opacity=".55"/><rect x="80" y="62" width="7" height="116" rx="3.5" fill="#fff" opacity=".35"/></g>
+</svg>

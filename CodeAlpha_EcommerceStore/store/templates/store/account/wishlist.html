@@ -1,0 +1,13 @@
+{% extends "store/account/base_account.html" %}
+{% block title %}Wishlist | Shopwise{% endblock %}
+
+{% block account_content %}
+<h1>My Wishlist <small class="muted">({{ products|length }})</small></h1>
+{% if products %}
+  <div class="grid" data-wishlist>
+    {% for p in products %}{% include "store/product_card.html" %}{% endfor %}
+  </div>
+{% else %}
+  <p class="empty">Your wishlist is empty. Tap the ♡ on any product to save it here.<br><a href="{% url 'product_list' %}">Browse products</a></p>
+{% endif %}
+{% endblock %}

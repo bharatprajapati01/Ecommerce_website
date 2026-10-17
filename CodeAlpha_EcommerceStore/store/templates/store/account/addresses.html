@@ -1,0 +1,46 @@
+{% extends "store/account/base_account.html" %}
+{% block title %}Saved Addresses | Shopwise{% endblock %}
+
+{% block account_content %}
+<h1>Saved Addresses</h1>
+
+{% if addresses %}
+  <div class="addr-grid">
+    {% for a in addresses %}
+      <article class="addr">
+        {% if a.is_default %}<span class="tag">Default</span>{% endif %}
+        <strong>{{ a.full_name }}</strong>
+        <p>{{ a.address }}<br>{{ a.city }} - {{ a.postal_code }}</p>
+        <p class="muted">Phone: {{ a.phone }}</p>
+        <div class="addr-actions">
+          {% if not a.is_default %}
+            <form method="post" action="{% url 'address_make_default' a.id %}">{% csrf_token %}<button class="linklike">Make default</button></form>
+          {% endif %}
+          <form method="post" action="{% url 'address_delete' a.id %}">{% csrf_token %}<button class="linklike danger">Remove</button></form>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="empty">You have no saved addresses yet.</p>
+{% endif %}
+
+<h2 class="sub-title">Add a new address</h2>
+<form method="post" class="form acct-form">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  {% for field in form %}
+    <div class="field {% if field.field.widget.input_type == 'checkbox' %}check{% endif %}">
+      {% if field.field.widget.input_type == 'checkbox' %}
+        <label for="{{ field.id_for_label }}">{{ field }} {{ field.label }}</label>
+      {% else %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+      {% endif %}
+      {% for e in field.errors %}<p class="err">{{ e }}</p>{% endfor %}
+    </div>
+  {% endfor %}
+  <button class="btn" type="submit">Save address</button>
+</form>
+<p class="muted">Your default address is filled in automatically at checkout.</p>
+{% endblock %}

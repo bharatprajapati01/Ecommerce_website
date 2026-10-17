@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Insulated Travel Flask">
+<title>Insulated Travel Flask</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dcfce7"/><stop offset="1" stop-color="#ccfbf1"/></linearGradient></defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<circle cx="300" cy="225" r="172" fill="#fff" opacity=".55"/>
+<ellipse cx="300" cy="404" rx="118" ry="11" fill="#0f172a" opacity=".1"/>
+<g transform="translate(120 45) scale(1.8)"><path d="M134 22 Q160 22 160 46 Q160 62 138 62" fill="none" stroke="#1f2937" stroke-width="8" stroke-linecap="round"/><rect x="66" y="10" width="68" height="30" rx="10" fill="#0e8174"/><rect x="72" y="38" width="56" height="150" rx="16" fill="#14b8a6"/><rect x="72" y="80" width="56" height="10" fill="#0e8174" opacity=".6"/><rect x="72" y="170" width="56" height="18" rx="9" fill="#1f2937"/><rect x="80" y="52" width="6" height="104" rx="3" fill="#fff" opacity=".35"/></g>
+</svg>

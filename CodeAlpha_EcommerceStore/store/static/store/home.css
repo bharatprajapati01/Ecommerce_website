@@ -1,0 +1,86 @@
+/* For You page + icon category bar. Loaded after style.css, so it overrides the older
+   category-bar rules there. */
+
+/* ---------- Category bar: emoji above the label ---------- */
+.cat-menu { justify-content: space-between; gap: 0; }
+.cat-menu > li > a { display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 8px 16px 6px; font-size: 0.8rem; font-weight: 600; color: #1f2937; white-space: nowrap; border-bottom: 3px solid transparent; border-radius: 10px 10px 0 0; }
+.ci { font-size: 1.55rem; line-height: 1.25; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", system-ui, sans-serif; }
+.cat-menu > li.active > a { color: var(--brand); background: #eef2ff; border-bottom-color: var(--brand); }
+.cat-menu > li:hover > a { background: #f5f7ff; }
+.cat-menu > li:nth-last-child(-n+2) .submenu { left: auto; right: 0; }
+.submenu a { white-space: nowrap; }
+
+@media (max-width: 800px) {
+  .cat-menu { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; scrollbar-width: none; }
+  .cat-menu::-webkit-scrollbar { display: none; }
+  /* Dropdowns are hover-only; on phones the category page shows its subcategory chips instead. */
+  .submenu { display: none !important; }
+  .caret { display: none; }
+  .cat-menu > li > a { padding: 8px 12px 6px; }
+}
+
+/* ---------- Home page ---------- */
+.home { padding-top: 16px; }
+.home-title { margin: 28px 0 14px; font-size: 1.3rem; }
+.see-all { text-align: center; margin: 22px 0 0; }
+.kicker { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.72rem; font-weight: 600; opacity: 0.9; }
+.from { display: inline-block; background: #fff; color: #111827; font-weight: 700; border-radius: 999px; padding: 4px 14px; margin-right: 12px; font-size: 0.9rem; }
+.cta { font-weight: 700; }
+.ad-tag { position: absolute; right: 12px; bottom: 10px; background: rgba(255, 255, 255, 0.3); color: #fff; font-size: 0.62rem; padding: 2px 7px; border-radius: 6px; letter-spacing: 0.08em; }
+
+/* Hero carousel */
+.hero { margin-bottom: 18px; }
+.hero-track { position: relative; display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.hero-track::-webkit-scrollbar { display: none; }
+.hero-slide { position: relative; flex: 0 0 calc(50% - 8px); scroll-snap-align: start; min-height: 196px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 22px 28px; border-radius: 16px; color: #fff; overflow: hidden; }
+.hero-slide:hover { text-decoration: none; filter: brightness(1.06); }
+.hero-copy h2 { margin: 4px 0 6px; font-size: clamp(1.4rem, 2.1vw, 2.1rem); line-height: 1.1; color: #fff; }
+.hero-copy p { margin: 0 0 12px; opacity: 0.92; }
+.hero-art { display: flex; align-items: center; flex-shrink: 0; padding-right: 14px; }
+.hero-art img { width: 132px; height: 99px; object-fit: cover; border-radius: 12px; border: 3px solid #fff; box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28); background: #fff; }
+.hero-art img:first-child { transform: rotate(-6deg); position: relative; z-index: 1; }
+.hero-art img:last-child { transform: rotate(5deg) translate(-14px, 10px); }
+.hero-art img:only-child { transform: rotate(-3deg); }
+.hero-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+.hero-dots button { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 999px; background: #cbd5e1; cursor: pointer; transition: all 0.2s; }
+.hero-dots button.on { width: 22px; background: var(--brand); }
+
+/* Purple "Under ₹999" strip */
+.strip { position: relative; margin: 18px 0; padding: 16px 16px 18px; border-radius: 16px; background: linear-gradient(135deg, #6d28d9, #7c3aed); }
+.strip h2 { margin: 0 0 12px; font-size: 1.15rem; color: #fff; }
+.strip-track { display: flex; gap: 12px; overflow-x: auto; scroll-behavior: smooth; scroll-snap-type: x proximity; scrollbar-width: none; }
+.strip-track::-webkit-scrollbar { display: none; }
+.strip-card { flex: 0 0 172px; display: flex; flex-direction: column; gap: 3px; padding: 8px; border-radius: 12px; background: #fff; color: var(--ink); scroll-snap-align: start; transition: transform 0.15s; }
+.strip-card:hover { text-decoration: none; transform: translateY(-3px); }
+.strip-img { aspect-ratio: 4 / 3; border-radius: 8px; overflow: hidden; background: #f2f4f7; }
+.strip-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.strip-cat { margin-top: 4px; font-size: 0.74rem; color: var(--muted); }
+.strip-card strong { font-size: 0.88rem; line-height: 1.25; min-height: 2.5em; }
+.strip-price { font-weight: 700; }
+.strip-next { position: absolute; right: 8px; top: 50%; width: 38px; height: 38px; border: 0; border-radius: 50%; background: #fff; color: #111827; font-size: 1.5rem; line-height: 1; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); }
+
+/* Wide banners */
+.wide-ad { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 26px 0; padding: 28px 40px; min-height: 160px; border-radius: 16px; color: #fff; overflow: hidden; }
+.wide-ad:hover { text-decoration: none; filter: brightness(1.06); }
+.wide-copy h2 { margin: 4px 0 12px; font-size: clamp(1.4rem, 2.6vw, 2.3rem); color: #fff; }
+.wide-art img { width: 170px; height: 128px; }
+
+/* Shop by category tiles */
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+.tile { padding: 18px 10px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); color: var(--ink); text-align: center; font-weight: 600; transition: all 0.15s; }
+.tile:hover { text-decoration: none; border-color: var(--brand); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(16, 24, 40, 0.08); }
+.tile span { display: block; margin-bottom: 4px; font-size: 2.2rem; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; }
+
+@media (max-width: 800px) {
+  .hero-slide { flex-basis: 90%; padding: 18px 18px; min-height: 170px; }
+  .hero-art { padding-right: 0; }
+  .hero-art img { width: 84px; height: 63px; }
+  .hero-art img:last-child:not(:only-child) { display: none; } /* one picture is enough on a phone */
+  .hero-art img:first-child { transform: rotate(-4deg); }
+  .hero-copy h2 { font-size: 1.35rem; }
+  .from { white-space: nowrap; margin-right: 0; }
+  .cta { display: block; margin-top: 8px; }
+  .wide-ad { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .wide-art img { width: 110px; height: 82px; }
+  .strip-card { flex-basis: 150px; }
+}

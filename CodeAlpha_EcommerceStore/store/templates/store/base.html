@@ -1,0 +1,93 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Shopwise{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'store/style.css' %}?v={% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'store/footer.css' %}?v={% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'store/home.css' %}?v={% now 'U' %}">
+  <link rel="stylesheet" href="{% static 'store/account.css' %}?v={% now 'U' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="logo" href="{% url 'for_you' %}">Shop<span>wise</span></a>
+      <form class="search" method="get" action="{% url 'product_list' %}">
+        <input type="search" name="q" value="{{ q|default:'' }}" placeholder="Search products…" aria-label="Search products">
+        <button type="submit">Search</button>
+      </form>
+      <nav class="nav">
+        {% if user.is_authenticated %}
+          <div class="acct">
+            <button type="button" class="acct-btn" aria-haspopup="true" aria-expanded="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true">{{ account_links.0.icon }}</svg>
+              <span class="acct-name">{{ user.first_name|default:user.username }}</span>
+              <svg class="acct-caret" viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 15 12 9 18 15"/></svg>
+            </button>
+            <div class="acct-menu">
+              <h3>Your Account</h3>
+              <ul>
+                {% for l in account_links %}
+                  <li><a href="{{ l.url }}"><svg viewBox="0 0 24 24" aria-hidden="true">{{ l.icon }}</svg>{{ l.label }}</a></li>
+                {% endfor %}
+                <li>
+                  <form method="post" action="{% url 'logout' %}">{% csrf_token %}
+                    <button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true">{{ logout_icon }}</svg>Logout</button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        {% else %}
+          <a href="{% url 'login' %}">Login</a>
+          <a href="{% url 'register' %}">Register</a>
+        {% endif %}
+        <a class="cart-link" href="{% url 'cart_detail' %}">Cart <span id="cart-count" class="badge">{{ cart_count }}</span></a>
+      </nav>
+    </div>
+
+    <nav class="catbar" aria-label="Product categories">
+      <ul class="container cat-menu">
+        <li class="{% if request.resolver_match.url_name == 'for_you' %}active{% endif %}">
+          <a href="{% url 'for_you' %}"><span class="ci">✨</span><span class="cl">For You</span></a>
+        </li>
+        <li class="{% if request.resolver_match.url_name == 'product_list' and not category %}active{% endif %}">
+          <a href="{% url 'product_list' %}"><span class="ci">🛒</span><span class="cl">All Products</span></a>
+        </li>
+        {% for c in nav_categories %}
+          <li class="{% if c.children.all %}has-sub{% endif %}{% if category and category.pk == c.pk or category.parent_id == c.pk %} active{% endif %}">
+            <a href="{% url 'category' c.slug %}"{% if c.children.all %} aria-haspopup="true"{% endif %}>
+              <span class="ci">{{ c.icon }}</span><span class="cl">{{ c.name }}{% if c.children.all %} <span class="caret" aria-hidden="true">▾</span>{% endif %}</span>
+            </a>
+            {% if c.children.all %}
+              <ul class="submenu">
+                <li><a href="{% url 'category' c.slug %}" class="all-link">{{ c.icon }} All {{ c.name }}</a></li>
+                {% for s in c.children.all %}
+                  <li><a href="{% url 'category' s.slug %}">{{ s.icon }} {{ s.name }}</a></li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container{% block main_class %}{% endblock %}">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="msg {{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  {% include "store/footer.html" %}
+  <script src="{% static 'store/app.js' %}"></script>
+</body>
+</html>

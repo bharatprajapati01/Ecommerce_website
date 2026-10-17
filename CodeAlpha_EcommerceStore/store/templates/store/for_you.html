@@ -1,0 +1,66 @@
+{% extends "store/base.html" %}
+{% block title %}For You | Shopwise{% endblock %}
+{% block main_class %} wide home{% endblock %}
+
+{% block content %}
+{% if hero_ads %}
+<section class="hero" aria-label="Offers">
+  <div class="hero-track" id="hero-track">
+    {% for ad in hero_ads %}
+      <a class="hero-slide" href="{{ ad.url }}" style="{{ ad.style }}">
+        <div class="hero-copy">
+          <span class="kicker">{{ ad.kicker }}</span>
+          <h2>{{ ad.title }}</h2>
+          <p>{{ ad.text }}</p>
+          {% if ad.from_price %}<span class="from">From ₹{{ ad.from_price|floatformat:0 }}</span>{% endif %}
+          <span class="cta">{{ ad.cta }} &rarr;</span>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          {% for p in ad.art %}<img src="{{ p.picture }}" alt="">{% endfor %}
+        </div>
+        <span class="ad-tag">AD</span>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="hero-dots" id="hero-dots" aria-label="Choose offer"></div>
+</section>
+{% endif %}
+
+{% if budget %}
+<section class="strip" aria-label="Products under 999 rupees">
+  <h2>Under ₹999 ✨</h2>
+  <div class="strip-track" id="strip-track">
+    {% for p in budget %}
+      <a class="strip-card" href="{{ p.get_absolute_url }}">
+        <div class="strip-img">{% if p.picture %}<img src="{{ p.picture }}" alt="{{ p.name }}" loading="lazy">{% endif %}</div>
+        <span class="strip-cat">{{ p.category.icon }} {{ p.category.name }}</span>
+        <strong>{{ p.name }}</strong>
+        <span class="strip-price">₹{{ p.price }}</span>
+      </a>
+    {% endfor %}
+  </div>
+  <button type="button" class="strip-next" id="strip-next" aria-label="Scroll right">&rsaquo;</button>
+</section>
+{% endif %}
+
+{% if wide_ads.0 %}{% include "store/wide_ad.html" with ad=wide_ads.0 %}{% endif %}
+
+{% if picks %}
+  <h2 class="home-title">Picks for you</h2>
+  <div class="grid">
+    {% for p in picks %}{% include "store/product_card.html" %}{% endfor %}
+  </div>
+  <p class="see-all"><a class="btn ghost" href="{% url 'product_list' %}">See all products &rarr;</a></p>
+{% endif %}
+
+{% if wide_ads.1 %}{% include "store/wide_ad.html" with ad=wide_ads.1 %}{% endif %}
+
+{% if nav_categories %}
+  <h2 class="home-title">Shop by category</h2>
+  <div class="tiles">
+    {% for c in nav_categories %}
+      <a class="tile" href="{% url 'category' c.slug %}"><span>{{ c.icon }}</span>{{ c.name }}</a>
+    {% endfor %}
+  </div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "store/base.html" %}
+
+{% block content %}
+<div class="acct-layout">
+  <aside class="acct-side">
+    <div class="acct-hello">
+      <span class="avatar">{{ user.username|slice:":1"|upper }}</span>
+      <div><small>Hello,</small><strong>{% firstof user.get_full_name user.username %}</strong></div>
+    </div>
+    <ul>
+      {% for l in account_links %}
+        <li><a href="{{ l.url }}" class="{% if l.active %}on{% endif %}"><svg viewBox="0 0 24 24" aria-hidden="true">{{ l.icon }}</svg>{{ l.label }}</a></li>
+      {% endfor %}
+      <li>
+        <form method="post" action="{% url 'logout' %}">{% csrf_token %}
+          <button type="submit"><svg viewBox="0 0 24 24" aria-hidden="true">{{ logout_icon }}</svg>Logout</button>
+        </form>
+      </li>
+    </ul>
+  </aside>
+  <section class="acct-main">
+    {% block account_content %}{% endblock %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+<a class="wide-ad" href="{{ ad.url }}" style="{{ ad.style }}">
+  <div class="wide-copy">
+    <span class="kicker">{{ ad.kicker }}</span>
+    <h2>{{ ad.title }}</h2>
+    {% if ad.from_price %}<span class="from">From ₹{{ ad.from_price|floatformat:0 }}</span>{% endif %}
+    <span class="cta">{{ ad.cta }} &rarr;</span>
+  </div>
+  <div class="hero-art wide-art" aria-hidden="true">
+    {% for p in ad.art %}<img src="{{ p.picture }}" alt="">{% endfor %}
+  </div>
+  <span class="ad-tag">AD</span>
+</a>

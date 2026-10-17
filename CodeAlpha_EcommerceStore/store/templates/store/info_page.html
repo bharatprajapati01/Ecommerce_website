@@ -1,0 +1,23 @@
+{% extends "store/base.html" %}
+{% block title %}{{ title }} | Shopwise{% endblock %}
+
+{% block content %}
+<article class="info">
+  <p class="crumbs"><a href="{% url 'product_list' %}">Home</a> / {{ title }}</p>
+  <h1>{{ title }}</h1>
+  {% for p in paragraphs %}<p>{{ p }}</p>{% endfor %}
+
+  {% if is_sitemap %}
+    <ul class="sitemap">
+      <li><a href="{% url 'product_list' %}">All products</a></li>
+      {% for c in nav_categories %}
+        <li><a href="{% url 'category' c.slug %}">{{ c.name }}</a>
+          {% if c.children.all %}
+            <ul>{% for s in c.children.all %}<li><a href="{% url 'category' s.slug %}">{{ s.name }}</a></li>{% endfor %}</ul>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</article>
+{% endblock %}

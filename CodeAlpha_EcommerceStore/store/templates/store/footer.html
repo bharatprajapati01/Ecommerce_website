@@ -1,0 +1,86 @@
+<footer class="site-footer">
+  <div class="container footer-top">
+    <nav class="foot-col" aria-label="About">
+      <h4>About</h4>
+      <ul>
+        <li><a href="{% url 'info_page' 'contact-us' %}">Contact Us</a></li>
+        <li><a href="{% url 'info_page' 'about-us' %}">About Us</a></li>
+        <li><a href="{% url 'info_page' 'careers' %}">Careers</a></li>
+        <li><a href="{% url 'info_page' 'shopwise-stories' %}">Shopwise Stories</a></li>
+        <li><a href="{% url 'info_page' 'press' %}">Press</a></li>
+        <li><a href="{% url 'info_page' 'corporate-information' %}">Corporate Information</a></li>
+      </ul>
+    </nav>
+
+    <nav class="foot-col" aria-label="Help">
+      <h4>Help</h4>
+      <ul>
+        <li><a href="{% url 'info_page' 'payments' %}">Payments</a></li>
+        <li><a href="{% url 'info_page' 'shipping' %}">Shipping</a></li>
+        <li><a href="{% url 'info_page' 'cancellation-returns' %}">Cancellation &amp; Returns</a></li>
+        <li><a href="{% url 'info_page' 'faq' %}">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <nav class="foot-col" aria-label="Consumer policy">
+      <h4>Consumer Policy</h4>
+      <ul>
+        <li><a href="{% url 'info_page' 'cancellation-returns' %}">Cancellation &amp; Returns</a></li>
+        <li><a href="{% url 'info_page' 'terms-of-use' %}">Terms Of Use</a></li>
+        <li><a href="{% url 'info_page' 'security' %}">Security</a></li>
+        <li><a href="{% url 'info_page' 'privacy' %}">Privacy</a></li>
+        <li><a href="{% url 'info_page' 'sitemap' %}">Sitemap</a></li>
+        <li><a href="{% url 'info_page' 'grievance-redressal' %}">Grievance Redressal</a></li>
+      </ul>
+    </nav>
+
+    <div class="foot-col foot-contact">
+      <h4>Mail Us:</h4>
+      <address>
+        Shopwise Demo Store,<br>
+        Your Street Address, Your Area,<br>
+        Your City, Your State, India<br>
+        <a href="mailto:support@shopwise.example">support@shopwise.example</a>
+      </address>
+      <h4 class="social-title">Social:</h4>
+      <ul class="social">
+        <li><a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a></li>
+        <li><a href="https://x.com" target="_blank" rel="noopener" aria-label="X (Twitter)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4l16 16M20 4L4 20"/></svg></a></li>
+        <li><a href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a></li>
+        <li><a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a></li>
+      </ul>
+    </div>
+
+    <div class="foot-col foot-office">
+      <h4>Registered Office Address:</h4>
+      <address>
+        Shopwise Demo Store,<br>
+        Your Street Address, Your Area,<br>
+        Your City, Your State, India<br>
+        Telephone: <a href="tel:+910000000000">+91 00000 00000</a>
+      </address>
+      <p class="demo-note">Demo project: replace these placeholder details with your own.</p>
+    </div>
+  </div>
+
+  <div class="foot-bottom">
+    <div class="container foot-bottom-row">
+      <ul class="foot-links">
+        <li><a href="{% url 'info_page' 'become-a-seller' %}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1-5h16l1 5"/><path d="M4 9v11h16V9"/><path d="M9 20v-6h6v6"/></svg>Become a Seller</a></li>
+        <li><a href="{% url 'info_page' 'advertise' %}"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Advertise</a></li>
+        <li><a href="{% url 'info_page' 'gift-cards' %}"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Gift Cards</a></li>
+        <li><a href="{% url 'info_page' 'help-center' %}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Help Center</a></li>
+      </ul>
+      <p class="copyright">&copy; {% now "Y" %} Shopwise.com &middot; CodeAlpha Internship Project</p>
+      <ul class="pay" aria-label="Payment options shown for demonstration">
+        <li class="visa">VISA</li>
+        <li class="mc"><i></i><i></i></li>
+        <li class="rupay">RuPay</li>
+        <li class="upi">UPI</li>
+        <li class="small">NET<br>BANKING</li>
+        <li class="small">CASH ON<br>DELIVERY</li>
+        <li class="small">EASY<br>EMI</li>
+      </ul>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,31 @@
+{% extends "store/base.html" %}
+{% block title %}Checkout | Shopwise{% endblock %}
+
+{% block content %}
+<h1>Checkout</h1>
+<div class="checkout">
+  <form method="post" class="form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <div class="field">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% for e in field.errors %}<p class="err">{{ e }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+    <button class="btn" type="submit">Place order</button>
+  </form>
+
+  <aside class="summary">
+    <h3>Order summary</h3>
+    <ul>
+      {% for item in cart %}
+        <li><span>{{ item.quantity }} × {{ item.product.name }}</span><span>₹{{ item.line_total }}</span></li>
+      {% endfor %}
+    </ul>
+    <p class="total"><span>Total</span><strong>₹{{ cart.total }}</strong></p>
+    <p class="note">Payment is simulated for this demo: orders are saved as “Pending”.</p>
+  </aside>
+</div>
+{% endblock %}

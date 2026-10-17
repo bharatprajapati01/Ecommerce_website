@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" role="img" aria-label="Smart Watch">
+<title>Smart Watch</title>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#dbeafe"/><stop offset="1" stop-color="#e0e7ff"/></linearGradient></defs>
+<rect width="600" height="450" fill="url(#bg)"/>
+<circle cx="300" cy="225" r="172" fill="#fff" opacity=".55"/>
+<ellipse cx="300" cy="404" rx="118" ry="11" fill="#0f172a" opacity=".1"/>
+<g transform="translate(120 45) scale(1.8)"><rect x="74" y="12" width="52" height="64" rx="12" fill="#0b825a"/><rect x="74" y="124" width="52" height="64" rx="12" fill="#0b825a"/><circle cx="100" cy="146" r="2.6" fill="#fff" opacity=".4"/><circle cx="100" cy="158" r="2.6" fill="#fff" opacity=".4"/><circle cx="100" cy="170" r="2.6" fill="#fff" opacity=".4"/><rect x="144" y="90" width="7" height="16" rx="3" fill="#94a3b8"/><rect x="56" y="58" width="90" height="84" rx="26" fill="#1f2937"/><rect x="64" y="66" width="74" height="68" rx="20" fill="#0b1220"/><text x="101" y="106" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#fff">10:09</text><path d="M80 122 H122" stroke="#10b981" stroke-width="4" stroke-linecap="round"/><path d="M82 80 H108" stroke="#10b981" stroke-width="3" stroke-linecap="round" opacity=".7"/></g>
+</svg>

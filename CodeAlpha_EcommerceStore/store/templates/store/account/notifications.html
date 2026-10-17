@@ -1,0 +1,22 @@
+{% extends "store/account/base_account.html" %}
+{% block title %}Notifications | Shopwise{% endblock %}
+
+{% block account_content %}
+<h1>Notifications</h1>
+{% if orders %}
+  <ul class="notes">
+    {% for o in orders %}
+      <li>
+        <span class="dot {{ o.status }}"></span>
+        <div>
+          <strong>Order #{{ o.id }} is {{ o.get_status_display|lower }}</strong>
+          <p>{{ o.items.count }} item{{ o.items.count|pluralize }} &middot; ₹{{ o.total }} &middot; placed {{ o.created|date:"d M Y, H:i" }}</p>
+        </div>
+        <a href="{% url 'order_history' %}">View</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p class="empty">No notifications yet. Updates about your orders will appear here.</p>
+{% endif %}
+{% endblock %}
