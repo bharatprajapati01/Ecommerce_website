@@ -1,0 +1,26 @@
+{% extends "social/base.html" %}
+{% block title %}Notifications · Circle{% endblock %}
+{% block content %}
+<div class="narrow">
+  <section class="card">
+    <h3>Notifications</h3>
+    {% for n in items %}
+    <a class="notif {% if n.is_new %}new{% endif %}" href="{% if n.post_id %}{% url 'post_detail' n.post_id %}{% else %}{% url 'profile' n.actor.username %}{% endif %}">
+      {% include "social/_avatar.html" with u=n.actor ring=True %}
+      <div class="notif-body">
+        <div><strong>{{ n.actor.username }}</strong> {{ n.text }}</div>
+        {% if n.post %}<div class="muted snippet">“{{ n.post.content|truncatechars:70 }}”</div>{% endif %}
+        <div class="muted">{{ n.created_at|timesince }} ago</div>
+      </div>
+      <span class="kind-icon {{ n.kind }}">
+        {% if n.kind == 'like' %}<svg width="18" height="18" class="icon"><use href="#i-heart"/></svg>
+        {% elif n.kind == 'comment' %}<svg width="18" height="18" class="icon"><use href="#i-chat"/></svg>
+        {% else %}<svg width="18" height="18" class="icon"><use href="#i-user"/></svg>{% endif %}
+      </span>
+    </a>
+    {% empty %}
+    <div class="empty"><strong>No notifications yet</strong>When someone likes or comments on your posts, or follows you, it shows up here.</div>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

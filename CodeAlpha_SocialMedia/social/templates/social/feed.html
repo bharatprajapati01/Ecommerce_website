@@ -1,0 +1,60 @@
+{% extends "social/base.html" %}
+{% block content %}
+<div class="layout">
+  <section class="feed-col">
+    <form class="card composer" id="composer" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.content }}
+      {{ form.content.errors }}
+      <div class="composer-row">
+        <label class="file"><svg width="20" height="20" class="icon"><use href="#i-image"/></svg>{{ form.image }}</label>
+        <button class="btn">Post</button>
+      </div>
+    </form>
+
+    <div class="tabs">
+      <a href="?scope=following{{ cat_qs }}" class="{% if scope != 'all' %}active{% endif %}">Following</a>
+      <a href="?scope=all{{ cat_qs }}" class="{% if scope == 'all' %}active{% endif %}">Everyone</a>
+    </div>
+
+    {% if active_category %}
+    <p class="filter-note">Showing <strong>{{ active_category.full_name }}</strong> <a href="?scope={{ scope }}">Clear filter</a></p>
+    {% endif %}
+
+    {% for post in page.object_list %}
+      {% include "social/_post.html" %}
+    {% empty %}
+      <div class="card empty">
+        {% if active_category %}
+          <strong>No posts in {{ active_category.name }} yet</strong>Clear the filter to see all posts.
+        {% elif scope == 'all' %}
+          <strong>No posts yet</strong>Write the first one above.
+        {% else %}
+          <strong>Your feed is empty</strong>Follow people to see their posts here, or <a href="?scope=all">browse everyone</a>.
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    {% if page.has_other_pages %}
+    <div class="pager">
+      {% if page.has_previous %}<a class="btn ghost" href="?scope={{ scope }}{{ cat_qs }}&page={{ page.previous_page_number }}">Newer</a>{% else %}<span></span>{% endif %}
+      <span class="muted">Page {{ page.number }} of {{ page.paginator.num_pages }}</span>
+      {% if page.has_next %}<a class="btn ghost" href="?scope={{ scope }}{{ cat_qs }}&page={{ page.next_page_number }}">Older</a>{% else %}<span></span>{% endif %}
+    </div>
+    {% endif %}
+  </section>
+
+  <aside class="card side">
+    <h3>People to follow</h3>
+    {% for s in suggestions %}
+      <div class="person">
+        {% include "social/_avatar.html" with u=s ring=True %}
+        <a class="name" href="{% url 'profile' s.username %}">{{ s.username }}</a>
+        <button class="follow-btn push-right" data-url="{% url 'toggle_follow' s.username %}">Follow</button>
+      </div>
+    {% empty %}
+      <p class="muted">You're following everyone for now.</p>
+    {% endfor %}
+  </aside>
+</div>
+{% endblock %}

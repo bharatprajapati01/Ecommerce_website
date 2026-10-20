@@ -1,0 +1,36 @@
+{% extends "social/base.html" %}
+{% block title %}Post by {{ post.author.username }}{% endblock %}
+{% block content %}
+<div class="narrow">
+  <a class="back" href="{% url 'feed' %}"><svg width="20" height="20" class="icon"><use href="#i-back"/></svg>Back to feed</a>
+  {% include "social/_post.html" %}
+
+  <section class="card">
+    <h3>Comments ({{ comments|length }})</h3>
+    <form class="comment-form" method="post">
+      {% csrf_token %}
+      {{ form.content }}
+      <button class="btn">Reply</button>
+    </form>
+    {{ form.content.errors }}
+
+    {% for c in comments %}
+    <div class="comment">
+      {% include "social/_avatar.html" with u=c.author size="sm" %}
+      <div class="comment-main">
+        <a class="name" href="{% url 'profile' c.author.username %}">{{ c.author.username }}</a>
+        <span class="muted">{{ c.created_at|timesince }} ago</span>
+        <div>{{ c.content }}</div>
+      </div>
+      {% if c.author_id == request.user.id %}
+      <form class="push-right" method="post" action="{% url 'delete_comment' c.id %}" data-confirm="Delete this comment?">
+        {% csrf_token %}<button class="link danger">Delete</button>
+      </form>
+      {% endif %}
+    </div>
+    {% empty %}
+    <p class="muted">No comments yet. Start the conversation.</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

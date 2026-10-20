@@ -1,0 +1,17 @@
+{% extends "social/base.html" %}
+{% block content %}
+<div class="narrow">
+  <a class="back" href="{% url 'profile' owner.username %}"><svg width="20" height="20" class="icon"><use href="#i-back"/></svg>{{ owner.username }}</a>
+  <section class="card">
+    <h3>{% if kind == 'followers' %}Followers{% else %}Following{% endif %}</h3>
+    {% for u in users %}
+      <div class="person">
+        {% include "social/_avatar.html" with ring=True %}
+        <a class="name" href="{% url 'profile' u.username %}">{{ u.username }}</a>
+      </div>
+    {% empty %}
+      <p class="muted">{% if kind == 'followers' %}No followers yet.{% else %}Not following anyone yet.{% endif %}</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "social/base.html" %}
+{% block title %}Log in · Circle{% endblock %}
+{% block content %}
+<div class="auth-wrap">
+  <div class="hero">
+    <h1>Stay close to <span>your circle.</span></h1>
+    <p>Share what you're up to, follow friends, and keep the conversation going.</p>
+    <div class="orbit" aria-hidden="true">
+      <i></i><i></i><div class="core"></div>
+      <div class="dot d1"><svg width="20" height="20" class="icon"><use href="#i-heart"/></svg></div>
+      <div class="dot d2"><svg width="20" height="20" class="icon"><use href="#i-chat"/></svg></div>
+      <div class="dot d3"><svg width="20" height="20" class="icon"><use href="#i-user"/></svg></div>
+    </div>
+  </div>
+  <form class="card form auth-card" method="post">
+    <h2>Welcome back</h2>
+    {% csrf_token %}
+    {% if form.errors %}<div class="error">That username and password don't match. Check them and try again.</div>{% endif %}
+    <label>Username {{ form.username }}</label>
+    <label>Password {{ form.password }}</label>
+    <button class="btn full">Log in</button>
+    <p class="muted" style="margin:0;text-align:center">New to Circle? <a href="{% url 'signup' %}">Create an account</a></p>
+  </form>
+</div>
+{% endblock %}

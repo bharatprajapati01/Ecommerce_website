@@ -1,0 +1,33 @@
+{% extends "social/base.html" %}
+{% block title %}{{ owner.username }} · Circle{% endblock %}
+{% block content %}
+<div class="narrow">
+  <section class="card profile-card">
+    <div class="cover"></div>
+    <div class="profile-body">
+      {% include "social/_avatar.html" with u=owner size="lg" ring=True %}
+      <h2>{{ owner.username }}</h2>
+      <p class="muted">{{ owner.profile.bio|default:"No bio yet." }}</p>
+      <div class="stats">
+        <div><strong>{{ posts|length }}</strong>posts</div>
+        <a href="{% url 'follow_list' owner.username 'followers' %}"><strong id="follower-count">{{ follower_count }}</strong>followers</a>
+        <a href="{% url 'follow_list' owner.username 'following' %}"><strong>{{ following_count }}</strong>following</a>
+      </div>
+      {% if owner == request.user %}
+        <a class="btn ghost" href="{% url 'edit_profile' %}">Edit profile</a>
+      {% else %}
+        <div class="profile-actions">
+          <button class="follow-btn big {% if is_following %}following{% endif %}" data-url="{% url 'toggle_follow' owner.username %}" data-count="#follower-count">{% if is_following %}Following{% else %}Follow{% endif %}</button>
+          <a class="btn ghost" href="{% url 'thread' owner.username %}"><svg width="20" height="20" class="icon"><use href="#i-mail"/></svg>Message</a>
+        </div>
+      {% endif %}
+    </div>
+  </section>
+
+  {% for post in posts %}
+    {% include "social/_post.html" %}
+  {% empty %}
+    <div class="card empty"><strong>No posts yet</strong>{% if owner == request.user %}Share your first post from the home feed.{% else %}{{ owner.username }} hasn't posted anything.{% endif %}</div>
+  {% endfor %}
+</div>
+{% endblock %}

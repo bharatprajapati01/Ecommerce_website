@@ -1,0 +1,34 @@
+{% extends "social/base.html" %}
+{% block title %}Your activity · Circle{% endblock %}
+{% block content %}
+<div class="narrow">
+  <h2 class="page-title">Your activity</h2>
+  <div class="stats big-stats">
+    <div><strong>{{ counts.posts }}</strong>posts</div>
+    <div><strong>{{ counts.likes }}</strong>likes given</div>
+    <div><strong>{{ counts.comments }}</strong>comments</div>
+    <a href="{% url 'saved' %}"><strong>{{ counts.saved }}</strong>saved</a>
+  </div>
+
+  <section class="card">
+    <h3>Your recent comments</h3>
+    {% for c in comments %}
+    <a class="notif" href="{% url 'post_detail' c.post_id %}">
+      <div class="notif-body">
+        <div>“{{ c.content|truncatechars:90 }}”</div>
+        <div class="muted">on {{ c.post.author.username }}'s post · {{ c.created_at|timesince }} ago</div>
+      </div>
+    </a>
+    {% empty %}
+    <p class="muted">You haven't commented on anything yet.</p>
+    {% endfor %}
+  </section>
+
+  <h3 class="page-title sub">Posts you liked</h3>
+  {% for post in liked_posts %}
+    {% include "social/_post.html" %}
+  {% empty %}
+    <div class="card empty"><strong>No likes yet</strong>Posts you like will be listed here.</div>
+  {% endfor %}
+</div>
+{% endblock %}

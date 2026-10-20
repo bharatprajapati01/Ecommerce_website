@@ -1,0 +1,24 @@
+{% extends "social/base.html" %}
+{% block title %}Search · Circle{% endblock %}
+{% block content %}
+<div class="narrow">
+  <form class="search card" action="{% url 'search' %}" method="get" style="max-width:none;padding:10px 14px">
+    <svg width="20" height="20" class="icon" style="left:30px"><use href="#i-search"/></svg>
+    <input type="search" name="q" placeholder="Search people" value="{{ q }}" aria-label="Search people" style="padding-left:44px">
+  </form>
+  <section class="card">
+    <h3>{% if q %}Results for “{{ q }}”{% else %}Find people{% endif %}</h3>
+    {% for u in users %}
+      <div class="person">
+        {% include "social/_avatar.html" with ring=True %}
+        <div>
+          <a class="name" href="{% url 'profile' u.username %}">{{ u.username }}</a>
+          {% if u.profile.bio %}<div class="muted bio-inline">{{ u.profile.bio }}</div>{% endif %}
+        </div>
+      </div>
+    {% empty %}
+      <p class="muted">{% if q %}No one matches “{{ q }}”. Try a different username.{% else %}Type a username to find people.{% endif %}</p>
+    {% endfor %}
+  </section>
+</div>
+{% endblock %}
