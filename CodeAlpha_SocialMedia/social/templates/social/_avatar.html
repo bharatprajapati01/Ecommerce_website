@@ -1,1 +1,0 @@
-{% if ring %}<span class="ring {{ size|default:'' }}">{% endif %}{% if u.profile.avatar %}<img class="avatar {{ size|default:'' }}" src="{{ u.profile.avatar.url }}" alt="">{% else %}<span class="avatar {{ size|default:'' }} placeholder">{{ u.username|slice:":1"|upper }}</span>{% endif %}{% if ring %}</span>{% endif %}
